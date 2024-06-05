@@ -79,65 +79,63 @@ class _ShowerSectionItemState extends State<ShowerSectionItem> {
             title: Text(showerSection.sectionName!),
             subtitle: Text(
                 'Duración: $formattedHours:$formattedMinutes:$formattedSeconds'),
-            trailing: SizedBox(
-              width: 100.0,
-              child: Row(
-                children: [
-                  IconButton(
-                    onPressed: () {
-                      newSectionFormProvider.sectionNameController.text =
-                          showerSection.sectionName!;
-                      newSectionFormProvider.minutesController.text =
-                          showerSection.formattedMinutes.toString();
-                      newSectionFormProvider.secondsController.text =
-                          showerSection.seconds!.toString();
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(
+                  onPressed: () {
+                    newSectionFormProvider.sectionNameController.text =
+                        showerSection.sectionName!;
+                    newSectionFormProvider.minutesController.text =
+                        showerSection.formattedMinutes.toString();
+                    newSectionFormProvider.secondsController.text =
+                        showerSection.seconds!.toString();
 
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => NewSectionFormScreen(
-                                showerSection: showerSection),
-                          ));
-                    },
-                    icon: const Icon(
-                      Icons.edit,
-                      size: 20.0,
-                    ),
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => NewSectionFormScreen(
+                              showerSection: showerSection),
+                        ));
+                  },
+                  icon: const Icon(
+                    Icons.edit,
+                    size: 20.0,
                   ),
-                  IconButton(
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return AlertDialog(
-                            title: const Text('Eliminar sección'),
-                            content: Text(
-                                '¿Estás seguro que deseas eliminar "${showerSection.sectionName}"?'),
-                            actions: [
-                              TextButton(
-                                onPressed: () => Navigator.of(context).pop(),
-                                child: const Text('Cancelar'),
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  showerSectionProvider
-                                      .deleteSection(showerSection.id!);
-                                  Navigator.of(context).pop();
-                                },
-                                child: const Text('Eliminar'),
-                              ),
-                            ],
-                          );
-                        },
-                      );
-                    },
-                    icon: const Icon(
-                      Icons.delete,
-                      size: 20.0,
-                    ),
+                ),
+                IconButton(
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text('Eliminar sección'),
+                          content: Text(
+                              '¿Estás seguro que deseas eliminar "${showerSection.sectionName}"?'),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.of(context).pop(),
+                              child: const Text('Cancelar'),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                showerSectionProvider
+                                    .deleteSection(showerSection.id!);
+                                Navigator.of(context).pop();
+                              },
+                              child: const Text('Eliminar'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
+                  icon: const Icon(
+                    Icons.delete,
+                    size: 20.0,
                   ),
-                ],
-              ),
+                ),
+              ],
             ));
       },
     );
