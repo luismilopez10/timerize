@@ -68,7 +68,7 @@ class _ShowerSectionItemState extends State<ShowerSectionItem> {
             showerSection.seconds.toString().padLeft(2, '0');
 
         final String formattedMinutes =
-            showerSection.minutes.toString().padLeft(2, '0');
+            showerSection.formattedMinutes.toString().padLeft(2, '0');
 
         final String formattedHours =
             showerSection.hours.toString().padLeft(2, '0');
@@ -88,7 +88,7 @@ class _ShowerSectionItemState extends State<ShowerSectionItem> {
                       newSectionFormProvider.sectionNameController.text =
                           showerSection.sectionName!;
                       newSectionFormProvider.minutesController.text =
-                          showerSection.minutes!.toString();
+                          showerSection.formattedMinutes.toString();
                       newSectionFormProvider.secondsController.text =
                           showerSection.seconds!.toString();
 

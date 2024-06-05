@@ -1,21 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 
 class Helpers {
   static String formatTimeText(int totalTimeInSeconds) {
     return '';
   }
 
-  static void showToast(String message) {
-    Fluttertoast.cancel();
-    Fluttertoast.showToast(
-      msg: message,
-      toastLength: Toast.LENGTH_SHORT,
-      gravity: ToastGravity.BOTTOM,
-      timeInSecForIosWeb: 1,
-      backgroundColor: Colors.black87,
-      textColor: Colors.white,
-      fontSize: 16.0,
+  static void displayToast(String message, BuildContext context) {
+    showToast(
+      message,
+      context: context,
+      animation: StyledToastAnimation.slideFromBottom,
+      reverseAnimation: StyledToastAnimation.fade,
+      position: StyledToastPosition.bottom,
+      animDuration: const Duration(milliseconds: 500),
+      duration: const Duration(seconds: 3),
+      curve: Curves.elasticOut,
+      reverseCurve: Curves.linear,
+      // backgroundColor: Theme.of(context).primaryColorDark,
     );
   }
 }

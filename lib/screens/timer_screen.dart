@@ -90,7 +90,7 @@ class _TimerScreenState extends State<TimerScreen> {
 
     totalCurrentSectionTimeInSeconds = currentShowerSection.seconds! +
         (widget.showerSectionProvider!.showerSectionList[currentIndex]
-                .minutes! *
+                .formattedMinutes *
             60) +
         (widget.showerSectionProvider!.showerSectionList[currentIndex].hours! *
             3600);
@@ -99,16 +99,21 @@ class _TimerScreenState extends State<TimerScreen> {
       appBar: AppBar(
         title: const Text(''),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.restart_alt),
-            tooltip: 'Reiniciar',
-            onPressed: () {
-              currentIndex = 0;
-              countdownController.restart();
-              isPlaying = false;
-              Future.delayed(const Duration(milliseconds: 300))
-                  .then((_) => countdownController.pause());
-            },
+          Padding(
+            padding: const EdgeInsets.only(right: 10.0),
+            child: InkWell(
+              borderRadius: BorderRadius.circular(50.0),
+              onTap: () => Helpers.displayToast(
+                  'Mantén presionado para reiniciar por completo', context),
+              onLongPress: () => _resetTimerize(context),
+              child: const Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Icon(
+                  Icons.restart_alt,
+                  size: 30.0,
+                ),
+              ),
+            ),
           ),
         ],
       ),
@@ -205,7 +210,7 @@ class _TimerScreenState extends State<TimerScreen> {
                             _speak(
                                 'Inicia: ${widget.showerSectionProvider!.showerSectionList.elementAt(currentIndex).sectionName!}');
                           } else {
-                            _speak('Se han concluído todas las secciones');
+                            _speak('Temporizador finalizado');
                             Navigator.pop(context);
                           }
                         });
@@ -278,8 +283,9 @@ class _TimerScreenState extends State<TimerScreen> {
                 ),
                 MaterialButton(
                   enableFeedback: true,
-                  onPressed: () =>
-                      Helpers.showToast('Mantén presionado para reiniciar'),
+                  onPressed: () => Helpers.displayToast(
+                      'Mantén presionado para reiniciar "${currentShowerSection.sectionName}"',
+                      context),
                   onLongPress: () {
                     countdownController.restart();
                     isPlaying = false;
@@ -346,5 +352,14 @@ class _TimerScreenState extends State<TimerScreen> {
         ),
       ),
     );
+  }
+
+  void _resetTimerize(BuildContext context) {
+    currentIndex = 0;
+    countdownController.restart();
+    isPlaying = false;
+    Future.delayed(const Duration(milliseconds: 300))
+        .then((_) => countdownController.pause());
+    Helpers.displayToast('Se ha reiniciado el temporizador', context);
   }
 }

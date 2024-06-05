@@ -15,6 +15,7 @@ class ShowerSection {
   int? orderIndex;
   int? seconds;
   int? minutes;
+  int? _formattedMinutes;
   int? hours;
 
   ShowerSection({
@@ -24,7 +25,8 @@ class ShowerSection {
     this.seconds,
     this.minutes,
   }) {
-    hours = _getHours();
+    _formattedMinutes = minutes! % 60;
+    hours = minutes! ~/ 60;
   }
 
   factory ShowerSection.fromJson(Map<String, dynamic> json) => ShowerSection(
@@ -43,9 +45,7 @@ class ShowerSection {
         "minutes": minutes,
       };
 
-  int _getHours() {
-    return minutes! ~/ 60;
-  }
+  int get formattedMinutes => _formattedMinutes!;
 
   @override
   String toString() {
