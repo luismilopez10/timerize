@@ -87,7 +87,7 @@ class _ShowerSectionItemState extends State<ShowerSectionItem> {
                     newSectionFormProvider.sectionNameController.text =
                         showerSection.sectionName!;
                     newSectionFormProvider.minutesController.text =
-                        showerSection.formattedMinutes.toString();
+                        showerSection.minutes.toString();
                     newSectionFormProvider.secondsController.text =
                         showerSection.seconds!.toString();
 
