@@ -9,6 +9,7 @@ import 'package:timer_count_down/timer_count_down.dart';
 import 'package:timerize/settings/application_assets.dart';
 import 'package:timerize/helpers/helpers.dart';
 import 'package:timerize/models/models.dart';
+import 'package:timerize/widgets/widgets.dart';
 import 'package:timerize/providers/providers.dart';
 
 class TimerScreen extends StatefulWidget {
@@ -113,6 +114,15 @@ class _TimerScreenState extends State<TimerScreen> {
                   size: 30.0,
                 ),
               ),
+            ),
+          ),
+          MultiTapRecognizer(
+            taps: 5,
+            onMultiTap: () =>
+                Helpers.displayToast('Se ha presionado 5 veces', context),
+            child: const Icon(
+              Icons.house,
+              size: 30.0,
             ),
           ),
         ],
